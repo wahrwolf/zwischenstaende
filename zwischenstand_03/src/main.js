@@ -39,6 +39,12 @@ function main() {
         cube.position.y = e;
     });
 
+    var proxies = {z_pos: 0};
+    gui.add(proxies, "z_pos", -50, 50).onChange(function (e) {
+        cube.position.z = e;
+        sphere.position.z = e;
+    });
+
     renderer = new THREE.WebGLRenderer({antialias: true});
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(new THREE.Color(0xffffff));
