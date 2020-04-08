@@ -33,20 +33,22 @@ function main() {
     ambientLight.intensity = 0.5;
     scene.add(ambientLight);
 
-    var directionalLight = new THREE.DirectionalLight(0xffffff);
-    directionalLight.position.set(15, 20, 20);
-    directionalLight.target = plane;
-    directionalLight.intensity = 0.5;
-    scene.add(directionalLight);
+    var spotLight = new THREE.SpotLight(0xffffff);
+    spotLight.position.set(15, 20, 20);
+    spotLight.target = plane;
+    spotLight.intensity = 0.8;
+    spotLight.angle = 30 * DEG_TO_RAD;
+    spotLight.penumbra = 1;
+    scene.add(spotLight);
 
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(30, 40, 50);
     camera.lookAt(0, 0, 0);
 
     var gui = new dat.GUI();
-    gui.add(directionalLight.position, "x", -50, 50);
-    gui.add(directionalLight.position, "y", -50, 50);
-    gui.add(directionalLight.position, "z", -50, 50);
+    gui.add(spotLight.position, "x", -50, 50);
+    gui.add(spotLight.position, "y", -50, 50);
+    gui.add(spotLight.position, "z", -50, 50);
 
     renderer = new THREE.WebGLRenderer({antialias: true});
     renderer.setSize(window.innerWidth, window.innerHeight);
