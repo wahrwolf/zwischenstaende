@@ -34,16 +34,20 @@ function main() {
     camera.lookAt(0, 0, 0);
 
     var gui = new dat.GUI();
-    gui.add(sphere.position, "x", -50, 50).step(5);
-    gui.add(sphere.position, "y", -50, 50).onChange(function (e) {
-        cube.position.y = e;
-    });
-
-    var proxies = {z_pos: 0};
-    gui.add(proxies, "z_pos", -50, 50).onChange(function (e) {
+    function aktualisiereYAchse(neuePosition) {
+        cube.position.y = neuePosition;
+    }
+    
+    function aktualisierePosition (e) {
         cube.position.z = e;
         sphere.position.z = e;
-    });
+    }
+    
+    gui.add(sphere.position, "x", -50, 50).step(5);
+    gui.add(sphere.position, "y", -50, 50).onChange(aktualisiereYAchse);
+
+    var proxies = {z_pos: 0};
+    gui.add(proxies, "z_pos", -50, 50).onChange(aktualisierePosition);
 
     renderer = new THREE.WebGLRenderer({antialias: true});
     renderer.setSize(window.innerWidth, window.innerHeight);
