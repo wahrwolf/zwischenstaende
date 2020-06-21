@@ -6,6 +6,14 @@ function main() {
 
     var axes = new THREE.AxesHelper(20);
     scene.add(axes);
+    
+    var kugelDrahtGeruest = new THREE.SphereGeometry(5, 10, 10);
+    var kugelMaterial = new THREE.MashBasicMaterial({color: 0x0000ff, wireframe: true});
+    var kugel = new THREE.Mesh(kugelDrahtGeruest, kugelMaterial);
+    kugel.position.set(10, 5,-5);
+    kugel.rotation.set(-90,0,0);
+    scene.add(kugel);
+    
 
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(30, 40, 50);
@@ -22,8 +30,8 @@ function main() {
         renderer.render(scene, camera);
         requestAnimationFrame(mainLoop);
     }
-
     mainLoop();
+    
 }
 
 window.onload = main;
